@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Slackr</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- You can add your styles and scripts here -->
+  <link rel="stylesheet" type="text/css" media="screen" href="styles/provided.css" />
+  <script type="module" src="src/helpers.js"></script>
+</head>
+
+<body>
+  <!-- This is an example app structure, you can modify this as much as you choose -->
+
+  <h1 id="slackr-title">Slackr</h1>
+  <button id="logout-button">Log Out</button>
+
+  
+  <div id="login-form">
+    <div>
+      <h2>Log In</h2>
+    </div>
+    <div>
+      <label for="email-login">Email:</label>
+    </div>
+    <div>
+      <input type="text" id="email-login">
+    </div>
+    <div>
+      <label for="password-login">Password:</label>
+    </div>
+    <div>
+      <input type="password" id="password-login">
+    </div>
+    <div>
+      <button id="login-form-login-button" register-form-register-button>Log In</button>
+    </div>
+    <div>
+      <button id="login-form-register-button">Register</button>
+    </div>
+  </div>
+  <div id="register-form">
+    <div>
+      <h2>Register</h2>
+    </div>
+    <div>
+      <label for="email-register">Email:</label>
+    </div>
+    <div>
+      <input type="text" id="email-register">
+    </div>
+    <div>
+      <label for="name-register">Name:</label>
+    </div>
+    <div>
+      <input type="text" id="name-register">
+    </div>
+    <div>
+      <label for="password-register">Password:</label>
+    </div>
+    <div>
+      <input type="password" id="password-register">
+    </div>
+    <div>
+      <label for="password-register-confirm">Confirm Password:</label>
+    </div>
+    <div>
+      <input type="password" id="password-register-confirm">
+    </div>
+    <div>
+      <button id="register-form-register-button">Register</button>
+    </div>
+    <div>
+      <button id="register-form-login-button">Login</button>
+    </div>
+  </div>
+  <div id="error-popup" class="fade-in"> 
+      <p id="error-popup-message"></p>
+      <button id="error-popup-x-button">X</button>
+      <button id="error-popup-close-button">Close</button>
+  </div>
+  <div id="home-page">
+      <div id="channels-panel">
+          <h3 id="channels-title">Channels</h3>
+          <button id="add-channels-button">+</button>
+          <div id="channels-list"></div>
+      </div>   
+      <div id="channels-screen">
+        <span id="channel-name"></span>
+        <div id="channel-message-list"></div>
+        <div>
+          <form>
+            <input type="submit" name="" id="channel-message-input-submit" value="Send">
+            <input type="text" placeholder="Message:" id="channel-message-input">
+          </form>
+        </div>
+        <input type="file" id="channel-message-input-image" accept="image/png, image/jpeg, image/jpg" class="hidden">
+        <button id="remove-file-button">Remove file</button>
+        <button id="show-pinned-messages">Show pinned</button>
+        <button id="show-channel-info">Channel Info</button>
+        <button id="invite-users">Invite other users</button>
+        <button id="show-profile-info">View/Edit Profile</button>
+        <button id="show-previous-messages">Previous mess.</button>
+        <label  id="message-page-number"></label>
+        <button id="show-next-messages">Next mess.</button>
+      </div>         
+  </div>
+  <div id="channel-form">
+    <div>
+      <h2>Create Channel</h2>
+    </div>
+    <button id="close-channel-form-button">X</button>
+    <div>
+      <label for="channel-form-name">Name:</label>
+    </div>
+    <div>
+      <input type="text" id="channel-form-name">
+    </div>
+    <div>
+      <label for="channel-form-description">Description (Optional):</label>
+    </div>
+    <div>
+      <input type="text" id="channel-form-description">
+    </div>
+    <div>
+      <label for="channel-form-type">Type:</label>
+    </div>
+    <div>
+      <select name="channel-form-type" id="channel-form-type">
+        <option value="Public">Public</option>
+        <option value="Private">Private</option>
+      </select>
+    </div>
+    <div>
+      <button id="channel-form-create-button">Create</button>
+    </div>
+  </div>
+  <div id="channel-info">
+    <button id="close-channel-info-button">X</button>
+    <div id="channel-info-name"></div>
+    <div id="channel-info-description"></div>
+    <div id="channel-info-channel-type"></div>
+    <div id="channel-info-creation-timestamp"></div>
+    <div id="channel-info-creator"></div>
+    <button id="update-channel-info-button">Edit</button>
+    <button id="channel-join-leave-button">Leave</button>
+  </div>
+  <div id="update-channel-info-form">
+    <button id="close-update-channel-info-button">X</button>
+    <div>
+      <label for="new-channel-info-name">New Channel Name:</label>
+    </div>
+    <div>
+      <input type="text" id="new-channel-info-name">
+    </div>
+    <div>
+      <label for="new-channel-info-description">New Channel Description:</label>
+    </div>
+    <div>
+      <input type="text" id="new-channel-info-description">
+    </div>
+    <div>
+      <button id="submit-new-channel-info">Update</button>
+    </div>
+  </div>
+  <div id="update-message-form">
+    <button id="close-message-info-button">X</button>
+    <div>
+      <label for="new-message-text">New Message:</label>
+    </div>
+    <form>
+      <div>
+        <input type="text" id="new-message-text">
+      </div>
+      <div>
+        <label for="new-message-image">New Image: </label>
+      </div>
+      <div>
+        <input type="file" id="new-message-image" accept="image/png, image/jpeg, image/jpg">
+      </div>
+      <div>
+        <button id="submit-new-message-info">Update</button>
+      </div>
+    </form>
+  </div>
+  <div id="invite-users-info">
+    <div>
+      <h2>Invite Users</h2>
+    </div>
+    <div id="invite-users-list"></div>
+    <button id="close-invite-users-info">X</button>
+  </div>
+  <div id="user-profile-info">
+    <div>
+      <h2>Profile Info</h2>
+    </div>
+    <div>
+      <img id="user-profile-photo" alt="User Profile Photo">
+    </div>
+    <div id="user-profile-name"></div>
+    <div>
+      <label for="user-profile-password" id="user-profile-password-label">Password: </label>
+      <input type="text" id="user-profile-password" readonly>
+    </div>
+    <div>
+      <label for="user-profile-password" id="show-password">Show Password </label>
+      <input type="checkbox" id="show-password">
+    </div>
+    <div id="user-profile-email"></div>
+    <div id="user-profile-bio"></div>
+    <div id="edit-profile-photo-title">Edit Profile Photo</div>
+    <div>
+      <input type="file" id="edit-profile-photo-button">
+    </div>
+    <div>
+      <input type="text"  id="edit-profile-name" placeholder="Edit name:">
+    </div>
+    <div>
+      <input type="text" id="edit-profile-password"  placeholder="Edit password:">
+    </div>
+    <div>
+      <input type="text" id="edit-profile-bio"  placeholder="Edit bio:">
+    </div>
+    <div>
+      <input type="text" id="edit-profile-email"  placeholder="Edit email:">
+    </div>
+    <div>
+      <button id="submit-new-profile-info">Update Profile</button>
+    </div>
+    <button id="close-user-profile-info">X</button>
+  </div>
+  <div id="image-modal">
+    <img id="image-in-image-modal">
+    <button id="close-image-modal">X</button>
+    <button id="image-modal-right">></button>
+    <button id="image-modal-left"><</button>
+  </div>
+  <template id="channel-screen-info">
+    <div class="message-card"> 
+      <div id="message-sender-timestamp"></div>
+      <div id="message-sender-name"></div>
+      <div id="message-text" class="message-text"></div>
+      <img id="message-sender-photo" alt="Default Profile Picture">
+      <div>
+        <img id="message-sent-photo">
+      </div>
+      <button id="delete-message-button">Delete</button>
+      <button id="edit-message-button">Edit</button>
+      <span id="emoji-1">&#128512;</span> 
+      <span id="emoji-2">&#128516;</span>
+      <span id="emoji-3">&#128151;</span>
+      <span id="emoji-1-count">0</span>
+      <span id="emoji-2-count">0</span>
+      <span id="emoji-3-count">0</span>
+      <input type="checkbox" id="pin-checkbox">
+      <label for="pin-checkbox" id="pin-checkbox-label">Pin</label>
+    </div>
+  </template>
+  <script type="module" src="src/register_and_login.js"></script>
+  <script type="module" src="src/channels.js"></script>
+  <script type="module" src="src/messages.js"></script>
+  <script type="module" src="src/multiuser.js"></script>
+</body>
+
+</html>
